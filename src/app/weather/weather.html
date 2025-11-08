@@ -1,4 +1,4 @@
-@if (forecasts.length > 0) {
+
 <table>
     <thead>
         <tr>
@@ -9,7 +9,7 @@
         </tr>
     </thead>
 <tbody>
-    @for (weather of forecasts; track $index) {
+    @for (weather of (forecasts$ | async); track $index) {
       <tr>
             <td> {{ weather.date}} </td>
             <td> {{ weather.temperatureC }} </td>
@@ -19,7 +19,3 @@
     }
 </tbody>
 </table>
-} 
-@else {
-    <p>Loading...</p>
-}

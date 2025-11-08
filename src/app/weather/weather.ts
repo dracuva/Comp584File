@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { WeatherData } from '../weather-data';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-weather',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './weather.html',
   styleUrl: './weather.scss'
 })
 
 export class Weather {
-  forecasts: WeatherData[] = [];
+  weather:any;
+  forecasts$: Observable<WeatherData[]>;
 
-  constructor(http: HttpClient) {
-    http.get<WeatherData[]>('http://localhost:5005/weatherforecast').subscribe(data => {
-      this.forecasts = data;
-    });
+  constructor(private http: HttpClient) {
+    this.forecasts$ = http.get<WeatherData[]>('http://localhost:5005/weatherforecast');
   }
 }
