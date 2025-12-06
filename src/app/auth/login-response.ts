@@ -1,5 +1,5 @@
 export interface LoginResponse {
     success: boolean;
-    token?: string;
-    message?: string;
+    token: string;
+    message: string;
 }
